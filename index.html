@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday [Friend's Name]! 🎉</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            min-height: 100vh;
+            color: #fff;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Section */
+        .header {
+            padding: 2rem 0;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Content Section */
+        .content {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            color: #333;
+        }
+
+        .poem-section {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-left: 4px solid #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .music-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .music-btn.playing {
+            background: #4CAF50;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .balloon {
+            position: absolute;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 1rem;
+                margin: 10px;
+            }
+        }
+
+        /* Confetti Effect */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        /* Music Button */
+        .music-btn {
+            padding: 12px 25px;
+            background: #ff6b6b;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer; 
+            transition: transform 0.3s ease;
+            margin: 1rem 0;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Happy Birthday, Manaswini! 🎂</h1>
+            <p>🎈 Wishing You An Amazing Day Filled With Joy! 🎈</p>
+        </header>
+
+        <main class="content">
+            <section class="poem-section">
+                <!-- Add your poem here later -->
+                <p>From Vizag’s beaches to Delhi’s crowded lanes,<br>
+                    You turn every journey to magic – no plane needed!<br>
+                    With a sunlit heart that no FOMO can chain,<br>
+                    You gather us all, like stars you’ve pleaded.<br>
+                    So here’s to more sunrises, new roads to chase,<br>
+                    You glue us together – MBA’s best group project!<br>
+                    </p>
+            </section>
+
+          
+            <div class="music-container">
+                <button class="music-btn" id="musicControl">🎵 Play Music</button>
+            </div>
+            
+            <p>May your day be as wonderful as you are! 🌟</p>
+        </main>
+    </div>
+
+    <!-- Decorative Elements -->
+    <div class="balloon" style="left: 10%; top: 15%">🎈</div>
+    <div class="balloon" style="left: 30%; top: 20%">🎉</div>
+    <div class="balloon" style="right: 15%; top: 25%">🎁</div>
+
+    <script>
+        // Add birthday music
+        let audio = new Audio('song.mp3');
+        let isPlaying = false;
+        const musicButton = document.getElementById('musicControl');
+
+        function toggleMusic() {
+            if(isPlaying) {
+                audio.pause();
+                musicButton.textContent = '🎵 Play Music';
+                musicButton.classList.remove('playing');
+            } else {
+                audio.play();
+                musicButton.textContent = '⏸ Pause Music';
+                musicButton.classList.add('playing');
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Handle audio ending
+        audio.addEventListener('ended', () => {
+            isPlaying = false;
+            musicButton.textContent = '🎵 Play Music';
+            musicButton.classList.remove('playing');
+        });
+
+        musicButton.addEventListener('click', toggleMusic);
+
+        // Create simple confetti effect
+        function createConfetti() {
+            for(let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+                document.body.appendChild(confetti);
+            }
+        }
+
+        // Initial confetti burst
+        createConfetti();
+    </script>
+</body>
+</html>
